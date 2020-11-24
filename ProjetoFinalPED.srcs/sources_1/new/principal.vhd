@@ -10,8 +10,17 @@ entity principal is
 end principal;
 
 architecture Behavioral of principal is
+    signal clk1 : STD_LOGIC;
+    signal clk2 : STD_LOGIC;
     signal clk3 : STD_LOGIC;
     signal speed : STD_LOGIC_VECTOR(11 downto 0);
+    
+component divisor_clk
+  Port ( clk : in STD_LOGIC;
+         clk1 : out STD_LOGIC;
+         clk2 : out STD_LOGIC;
+         clk3 : out STD_LOGIC);
+end component;
 
 component medeVelocidade
     Port ( clk3 : in STD_LOGIC;
@@ -20,5 +29,6 @@ component medeVelocidade
 end component;
 begin
 
+    C1: divisor_clk port map(clk, clk1, clk2, clk3);
     C3: medeVelocidade port map(clk3, sensor, speed);
 end Behavioral;
