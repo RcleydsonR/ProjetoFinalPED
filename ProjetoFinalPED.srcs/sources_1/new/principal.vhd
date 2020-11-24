@@ -35,7 +35,7 @@ architecture Behavioral of principal is
                speed : out STD_LOGIC_VECTOR(11 downto 0));
     end component;
       
-    component ind_Velocidade
+    component indicadorDeVelocidade
     Port ( clk2 : in STD_LOGIC;
            speed : in STD_LOGIC_VECTOR(11 downto 0);
            led : out STD_LOGIC_VECTOR(15 downto 0));
@@ -46,6 +46,6 @@ begin
     C1: divisor_clk     port map(clk, clk1, clk2, clk3);
     C2: pwm             port map(clk1, cu, pwm_out);
     C3: medeVelocidade  port map(clk3, sensor, speed);
-    C4: ind_Velocidade  port map (clk2, speed,led);
+    C4: indicadorDeVelocidade  port map (clk2, speed,led);
       
 end Behavioral;
