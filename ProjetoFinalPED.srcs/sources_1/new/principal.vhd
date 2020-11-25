@@ -8,6 +8,8 @@ entity principal is
          sel    : in STD_LOGIC;
          led    : out STD_LOGIC_VECTOR(15 downto 0);
          pwm_out: out STD_LOGIC);
+         an     : out STD_LOGIC_VECTOR(3 downto 0);
+         seg    : out STD_LOGIC_VECTOR(6 downto 0);
 end principal;
 
 architecture Behavioral of principal is
@@ -15,6 +17,8 @@ architecture Behavioral of principal is
     signal clk2     : STD_LOGIC;
     signal clk3     : STD_LOGIC;
     signal speed    : STD_LOGIC_VECTOR(11 downto 0);
+    signal dig0_s, dig1_s, dig2_s, dig3_s : STD_LOGIC_VECTOR(3 downto 0);
+    signal k        : std_logic_vector(11 downto 0);
     
     component divisor_clk
       Port ( clk : in STD_LOGIC;
@@ -41,11 +45,37 @@ architecture Behavioral of principal is
            led : out STD_LOGIC_VECTOR(15 downto 0));
     end component;  
     
+      component display
+        Port ( clk2  : in  STD_LOGIC;
+               dig0  : in  STD_LOGIC_VECTOR(3 downto 0);
+               dig1  : in  STD_LOGIC_VECTOR(3 downto 0);
+               dig2  : in  STD_LOGIC_VECTOR(3 downto 0);
+               dig3  : in  STD_LOGIC_VECTOR(3 downto 0);
+               an    : out STD_LOGIC_VECTOR(3 downto 0);
+               seg   : out STD_LOGIC_VECTOR(6 downto 0));
+    end component;
+    
+    component bin_to_bcd_decoder
+        Port (binary : in  std_logic_vector (11 downto 0);
+		      dig0   : out std_logic_vector (3 downto 0);
+		      dig1   : out std_logic_vector (3 downto 0);
+		      dig2   : out std_logic_vector (3 downto 0);
+		      dig3   : out std_logic_vector (3 downto 0));
+    end component;
+    
+    component MUX
+        Port (sel       : in  STD_LOGIC;
+              speed     : in  STD_LOGIC_VECTOR(11 downto 0);
+              cu        : in  STD_LOGIC_VECTOR(6 downto 0);
+              binaryout : out STD_LOGIC_VECTOR(11 downto 0));
+    end component;
 begin
     
-    C1: divisor_clk     port map(clk, clk1, clk2, clk3);
-    C2: pwm             port map(clk1, cu, pwm_out);
-    C3: medeVelocidade  port map(clk3, sensor, speed);
+    C1: divisor_clk            port map(clk, clk1, clk2, clk3);
+    C2: pwm                    port map(clk1, cu, pwm_out);
+    C3: medeVelocidade         port map(clk3, sensor, speed);
     C4: indicadorDeVelocidade  port map (clk2, speed,led);
-      
+    C5: display                port map(clk2 => clk2, dig0 => dig0_s, dig1 => dig1_s, dig2 => dig2_s, dig3 => dig3_s, an => an, seg => seg);
+    C6: bin_to_bcd_decoder     port map(binary => k, dig0 => dig0_s, dig1 => dig1_s, dig2 => dig2_s, dig3 => dig3_s);
+    C7: MUX                    port map(sel => sel, speed => speed, cu => cu, binaryout => k);  
 end Behavioral;
