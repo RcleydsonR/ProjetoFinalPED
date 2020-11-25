@@ -35,14 +35,14 @@ architecture Behavioral of bin_to_bcd_decoder is
 begin
 
 	process (binary)
-      -- Internal variable for storing bits
-      variable shift : unsigned(27 downto 0);
-	  -- Alias for parts of shift register
-      alias bin is shift(11 downto 0);
-      alias d0 is shift(bin'Length+3  downto bin'Length+0);
-      alias d1 is shift(bin'Length+7  downto bin'Length+4);
-      alias d2 is shift(bin'Length+11 downto bin'Length+8);
-	  alias d3 is shift(bin'Length+15 downto bin'Length+12);
+          -- Internal variable for storing bits
+          variable shift : unsigned(27 downto 0);
+          -- Alias for parts of shift register
+          alias bin is shift(11 downto 0);
+          alias d0 is shift(bin'Length+3  downto bin'Length+0);
+          alias d1 is shift(bin'Length+7  downto bin'Length+4);
+          alias d2 is shift(bin'Length+11 downto bin'Length+8);
+          alias d3 is shift(bin'Length+15 downto bin'Length+12);
 	begin
 		-- Clear previous number and store new number in shift register
 		bin := unsigned(binary);
