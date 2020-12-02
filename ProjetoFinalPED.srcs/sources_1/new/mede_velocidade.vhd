@@ -1,6 +1,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity mede_velocidade is
     Port ( clk3     : in STD_LOGIC;
@@ -9,8 +10,24 @@ entity mede_velocidade is
 end mede_velocidade;
 
 architecture Behavioral of mede_velocidade is
+signal contador : INTEGER:= 0;
+signal registrador : INTEGER:= 0;
+signal convertido : INTEGER:= 0;
 
 begin
 
+contagem: process(sensor, clk3)
+begin
+    if(rising_edge(sensor)) then
+        contador <= contador + 1;
+    end if;
+    if(rising_edge(clk3)) then
+        registrador <= contador;
+        convertido <= (registrador*60)/8;
+        contador <= 0;
+    end if;
+end process contagem;
+
+speed <= STD_LOGIC_VECTOR(TO_UNSIGNED(convertido,speed'length));
 
 end Behavioral;
