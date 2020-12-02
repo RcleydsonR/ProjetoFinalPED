@@ -12,7 +12,6 @@ end mede_velocidade;
 architecture Behavioral of mede_velocidade is
 signal contador : INTEGER:= 0;
 signal registrador : INTEGER:= 0;
-signal convertido : INTEGER:= 0;
 
 begin
 
@@ -22,12 +21,11 @@ begin
         contador <= contador + 1;
     end if;
     if(rising_edge(clk3)) then
-        registrador <= contador;
-        convertido <= (registrador*60)/8;
+        registrador <= contador*60/8;
         contador <= 0;
     end if;
 end process contagem;
 
-speed <= STD_LOGIC_VECTOR(TO_UNSIGNED(convertido,speed'length));
+speed <= STD_LOGIC_VECTOR(TO_UNSIGNED(registrador,speed'length));
 
 end Behavioral;
