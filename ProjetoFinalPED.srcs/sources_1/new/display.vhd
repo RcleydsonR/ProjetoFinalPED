@@ -13,24 +13,37 @@ entity display is
 end display;
 
 architecture Behavioral of display is
-signal dig_index: std_logic_vector(1 downto 0);
+signal dig_index: integer range 1 downto 0;
 signal dig_s: std_logic_vector(3 downto 0);
 
 begin
 
+process(clk2)
+variable count : integer range 0 to 3 := 3;
+begin
+	if(rising_edge(clk2)) then
+		if(count = 0) then
+			count := 3;
+		else
+			count := count - 1;
+		end if;
+		dig_index <= count;
+	end if;
+end process;
+
 process(dig_s, dig_index, dig0, dig1, dig2, dig3)
 begin 
     case dig_index is
-        when "00" =>
+        when 0 =>
             dig_s <= dig0;
             an    <= "0001";
-        when "01" =>
+        when 1 =>
             dig_s <= dig1;
             an    <= "0010";
-        when "10" =>
+        when 2 =>
             dig_s <= dig2;
             an    <= "0100";
-        when "11" =>
+        when 3 =>
             dig_s <= dig3;
             an    <= "1000";
     end case;
@@ -74,6 +87,5 @@ begin
                 seg <= "1111111";
   END CASE;
 end process;
-
 
 end Behavioral;
