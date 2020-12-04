@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.ALL;
 
 entity display is
     Port     ( clk2  : in  STD_LOGIC;

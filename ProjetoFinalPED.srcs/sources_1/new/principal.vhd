@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 entity principal is
   Port ( clk    : in STD_LOGIC;
@@ -18,7 +19,7 @@ architecture Behavioral of principal is
     signal clk3                             : STD_LOGIC;
     signal speed                            : STD_LOGIC_VECTOR(11 downto 0);
     signal dig0_s, dig1_s, dig2_s, dig3_s   : STD_LOGIC_VECTOR(3 downto 0);
-    signal k                                : std_logic_vector(11 downto 0);
+    signal k                                : STD_LOGIC_VECTOR(11 downto 0);
     
     component divisor_clk
       Port ( clk : in STD_LOGIC;
@@ -56,11 +57,11 @@ architecture Behavioral of principal is
     end component;
     
     component bin_to_bcd_decoder
-        Port (binary : in  std_logic_vector (11 downto 0);
-		      dig0   : out std_logic_vector (3 downto 0);
-		      dig1   : out std_logic_vector (3 downto 0);
-		      dig2   : out std_logic_vector (3 downto 0);
-		      dig3   : out std_logic_vector (3 downto 0));
+        Port (binary : in  STD_LOGIC_VECTOR (11 downto 0);
+		      dig0   : out STD_LOGIC_VECTOR (3 downto 0);
+		      dig1   : out STD_LOGIC_VECTOR (3 downto 0);
+		      dig2   : out STD_LOGIC_VECTOR (3 downto 0);
+		      dig3   : out STD_LOGIC_VECTOR (3 downto 0));
     end component;
     
     component MUX
