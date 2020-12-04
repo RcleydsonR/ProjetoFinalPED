@@ -13,7 +13,7 @@ entity display is
 end display;
 
 architecture Behavioral of display is
-signal dig_index: integer range 1 downto 0;
+signal dig_index: integer range 3 downto 0;
 signal dig_s: std_logic_vector(3 downto 0);
 
 begin
