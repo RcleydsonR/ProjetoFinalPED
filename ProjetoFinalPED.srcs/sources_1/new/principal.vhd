@@ -23,7 +23,7 @@ architecture Behavioral of principal is
     
     component divisor_clk
       Port ( clk : in STD_LOGIC;
-             clk1 : out STD_LOGIC;
+             clk1 : buffer STD_LOGIC;
              clk2 : out STD_LOGIC;
              clk3 : out STD_LOGIC);
     end component;
