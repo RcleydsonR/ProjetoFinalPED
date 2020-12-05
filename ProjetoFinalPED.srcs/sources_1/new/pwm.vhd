@@ -1,6 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.numeric_std.all;
+use IEEE.NUMERIC_STD.ALL;
 
 entity pwm is
  Port (clk      : in STD_LOGIC;

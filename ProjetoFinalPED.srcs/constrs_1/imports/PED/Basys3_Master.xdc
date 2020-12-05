@@ -141,8 +141,8 @@ set_property PACKAGE_PIN J1 [get_ports {pwm_out}]
 #set_property PACKAGE_PIN K2 [get_ports {JA[5]}]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports {JA[5]}]
 ##Sch name = JA9
-#set_property PACKAGE_PIN H2 [get_ports {JA[6]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {JA[6]}]
+set_property PACKAGE_PIN H2 [get_ports {sensor}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {sensor}]
 ##Sch name = JA10
 #set_property PACKAGE_PIN G3 [get_ports {JA[7]}]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports {JA[7]}]
@@ -151,8 +151,8 @@ set_property PACKAGE_PIN J1 [get_ports {pwm_out}]
 
 ##Pmod Header JB
 ##Sch name = JB1
-#set_property PACKAGE_PIN A14 [get_ports {SW1}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {SW1}]
+set_property PACKAGE_PIN A14 [get_ports {sel}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {sel}]
 ###Sch name = JB2
 #set_property PACKAGE_PIN A16 [get_ports {SW2}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {SW2}]
