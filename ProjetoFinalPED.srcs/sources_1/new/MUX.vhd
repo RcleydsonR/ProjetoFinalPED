@@ -10,10 +10,13 @@ entity MUX is
 end MUX;
 
 architecture Behavioral of MUX is
-
-signal k: STD_LOGIC_VECTOR(11 downto 0) := "000000000000";
 begin
-
-    k <= speed when sel = '0' else "00000" & cu;
-    binaryout <= k;
+    process(sel, speed, cu)
+    begin
+        if(sel = '0') then
+            binaryout <= speed;
+        else
+            binaryout <= "00000" & cu;
+        end if;
+    end process;   
 end Behavioral;

@@ -36,16 +36,16 @@ begin
     case dig_index is
         when 0 =>
             dig_s <= dig0;
-            an    <= "0001";
+            an    <= "1110";
         when 1 =>
             dig_s <= dig1;
-            an    <= "0010";
+            an    <= "1101";
         when 2 =>
             dig_s <= dig2;
-            an    <= "0100";
+            an    <= "1011";
         when 3 =>
             dig_s <= dig3;
-            an    <= "1000";
+            an    <= "0111";
     end case;
 end process;
 process(dig_s)
