@@ -29,7 +29,7 @@ architecture Behavioral of principal is
     end component;
 
     component pwm
-        Port (clk      : in STD_LOGIC;
+        Port (clk1      : in STD_LOGIC;
               cu       : in STD_LOGIC_VECTOR(6 downto 0);
               pwm_out  : out STD_LOGIC);
     end component;
@@ -73,7 +73,7 @@ architecture Behavioral of principal is
 begin
 
     C1: divisor_clk            port map (clk => clk, clk1 => clk1, clk2 => clk2, clk3 => clk3);
-    C2: pwm                    port map (clk => clk1, cu => cu, pwm_out => pwm_out);
+    C2: pwm                    port map (clk1 => clk1, cu => cu, pwm_out => pwm_out);
     C3: mede_velocidade        port map (clk3 => clk3, sensor => sensor, speed => speed);
     C4: indicador_velocidade   port map (clk2 => clk2, speed => speed, led => led);
     C5: display                port map (clk2 => clk2, dig0 => dig0_s, dig1 => dig1_s, dig2 => dig2_s, dig3 => dig3_s, an => an, seg => seg);
