@@ -7,7 +7,8 @@
 set_property PACKAGE_PIN W5 [get_ports clk]							
 	set_property IOSTANDARD LVCMOS33 [get_ports clk]
 	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clk]
- 
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets sensor_IBUF]
+
 ## Switches
 #set_property PACKAGE_PIN V17 [get_ports {sw[0]}]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports {sw[0]}]
@@ -154,8 +155,8 @@ set_property PACKAGE_PIN H2 [get_ports {sensor}]
 set_property PACKAGE_PIN A14 [get_ports {sel}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {sel}]
 ###Sch name = JB2
-#set_property PACKAGE_PIN A16 [get_ports {SW2}]					
-#	set_property IOSTANDARD LVCMOS33 [get_ports {SW2}]
+set_property PACKAGE_PIN A16 [get_ports {speed_sel}]					
+	set_property IOSTANDARD LVCMOS33 [get_ports {speed_sel}]
 ##Sch name = JB3
 #set_property PACKAGE_PIN B15 [get_ports {n1[0]}]					
 #	set_property IOSTANDARD LVCMOS33 [get_ports {n1[0]}]

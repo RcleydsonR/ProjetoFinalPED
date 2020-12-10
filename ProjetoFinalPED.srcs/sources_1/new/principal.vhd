@@ -20,6 +20,9 @@ architecture Behavioral of principal is
     signal speed                            : STD_LOGIC_VECTOR(11 downto 0);
     signal dig0_s, dig1_s, dig2_s, dig3_s   : STD_LOGIC_VECTOR(3 downto 0);
     signal k                                : STD_LOGIC_VECTOR(11 downto 0);
+    signal sensor_s                         : std_logic;
+    signal clk2_s                           : STD_LOGIC;
+    signal clk3_s                           : STD_LOGIC;
     
     component divisor_clk
       Port ( clk : in STD_LOGIC;
@@ -71,10 +74,11 @@ architecture Behavioral of principal is
               binaryout : out STD_LOGIC_VECTOR(11 downto 0));
     end component;
 begin
+    sensor_s <= sensor;
 
     C1: divisor_clk            port map (clk => clk, clk1 => clk1, clk2 => clk2, clk3 => clk3);
     C2: pwm                    port map (clk1 => clk1, cu => cu, pwm_out => pwm_out);
-    C3: mede_velocidade        port map (clk3 => clk3, sensor => sensor, speed => speed);
+    C3: mede_velocidade        port map (clk3 => clk3, sensor => sensor_s, speed => speed);
     C4: indicador_velocidade   port map (clk2 => clk2, speed => speed, led => led);
     C5: display                port map (clk2 => clk2, dig0 => dig0_s, dig1 => dig1_s, dig2 => dig2_s, dig3 => dig3_s, an => an, seg => seg);
     C6: bin_to_bcd_decoder     port map (binary => k, dig0 => dig0_s, dig1 => dig1_s, dig2 => dig2_s, dig3 => dig3_s);

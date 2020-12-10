@@ -9,24 +9,24 @@ entity mede_velocidade is
 end mede_velocidade;
 
 architecture Behavioral of mede_velocidade is
-signal contador : INTEGER:= 0;
+signal contador : INTEGER := 0;
 signal registrador : INTEGER:= 0;
-signal input : std_logic := sensor or clk3;
 begin
 
-
-contagem: process(input)
+process(clk3, sensor)
 begin
-    if(rising_edge(input)) then
-    if(clk3 = '1') then
+    if(rising_edge(clk3)) then
         registrador <= contador*60/8;
         contador <= 0;
-    elsif(sensor = '1') then
+    end if;
+    if(rising_edge(sensor)) then
         contador <= contador + 1;
     end if;
-    end if;
-end process contagem;
+end process;
 
-speed <= STD_LOGIC_VECTOR(TO_UNSIGNED(registrador,speed'length));
+process(registrador)
+begin   
+    speed <= STD_LOGIC_VECTOR(TO_UNSIGNED(registrador,speed'length));
+end process;
 
 end Behavioral;
