@@ -12,9 +12,11 @@ end indicador_velocidade;
 architecture Behavioral of indicador_velocidade is
     signal aux : unsigned(15 downto 0):= "1000000000000000";
     constant speed_max : INTEGER:= 4095;
+    signal clk_speed :STD_LOGIC :='0';
     
 begin
     led <= STD_LOGIC_VECTOR(aux);
+    
  process(clk2, speed)
     variable count: INTEGER range 0 to speed_max :=speed_max;
     variable speed_aux: INTEGER range 0 to speed_max;
@@ -25,10 +27,19 @@ begin
                 count:= count-(8*speed_aux/60);
                 if (count <= 0)then
                     count:= speed_max;
-                    aux <= rotate_right(aux,1);
+                    clk_speed<='1';
+                else
+                    clk_speed<='0';
                 end if;
             end if;
         end if;    
-    end process;
+ end process;
+    
+ process(clk_speed)
+    begin
+        if(rising_edge(clk_speed)) then       
+            aux <= rotate_right(aux,1);
+        end if;
+ end process;
 
 end Behavioral;
